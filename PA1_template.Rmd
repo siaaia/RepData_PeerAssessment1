@@ -101,7 +101,8 @@ median(totalStepsPerDay, na.rm=TRUE)
 Do these values differ from the estimates from the first part of the assignment?
 
 - Yes, the mean and median are higher than the estimates from the first part.
-
+  
+  
 What is the impact of imputing missing data on the estimates 
 of the total daily number of steps?
 
