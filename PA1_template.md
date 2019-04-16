@@ -74,6 +74,18 @@ plot(type="l",
 
 ![](PA1_template_files/figure-html/aveStepsPerInterval-1.png)<!-- -->
 
+Which 5-minute interval, on average across all the days in the dataset, contains 
+the maximum number of steps?
+
+
+```r
+names(which.max(aveStepsPerInterval))
+```
+
+```
+## [1] "835"
+```
+
 
 ## 4. Imputing missing values
 
