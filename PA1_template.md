@@ -25,7 +25,6 @@ activity <- read.csv("activity.csv", colClasses=c("numeric","Date","numeric"))
 ## 2. What is mean total number of steps taken per day?
 
 Make a histogram of the total number of steps taken each day.
-Calculate and report the median and mean steps per day.
 
 
 ```r
@@ -35,7 +34,10 @@ totalStepsPerDay <- tapply(X=activity$steps,
 hist(totalStepsPerDay)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
+![](PA1_template_files/figure-html/totalStepsPerDay-1.png)<!-- -->
+
+Calculate and report the median and mean steps per day.
+
 
 ```r
 mean(totalStepsPerDay, na.rm=TRUE)
@@ -70,7 +72,7 @@ plot(type="l",
      main="Average number of steps per 5-minute interval")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
+![](PA1_template_files/figure-html/aveStepsPerInterval-1.png)<!-- -->
 
 
 ## 4. Imputing missing values
@@ -88,6 +90,7 @@ sum(!complete.cases(activity))
 ```
 
 Devise a strategy for filling in all of the missing values in the dataset. 
+
 - Strategy: use the mean for that 5-minute interval across all days
 
 Create a new dataset that is equal to the original dataset 
@@ -105,20 +108,22 @@ new_activity[missing_rows, ]$steps <- aveStepsPerInterval[ missing_intervals ]
 ```
 
 Make a histogram of the total number of steps taken each day.
+
+
+```r
+totalStepsPerDay <- tapply(X=new_activity$steps, 
+                      INDEX=new_activity$date,
+                      FUN=sum, na.rm=TRUE)
+hist(totalStepsPerDay)
+```
+
+![](PA1_template_files/figure-html/imputedStepsPerDay-1.png)<!-- -->
+
 Calculate and report the mean and median total number of steps taken per day. 
 
 
 ```r
-stepsPerDay <- tapply(X=new_activity$steps, 
-                      INDEX=new_activity$date,
-                      FUN=sum, na.rm=TRUE)
-hist(stepsPerDay)
-```
-
-![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
-
-```r
-mean(stepsPerDay, na.rm=TRUE)
+mean(totalStepsPerDay, na.rm=TRUE)
 ```
 
 ```
@@ -126,7 +131,7 @@ mean(stepsPerDay, na.rm=TRUE)
 ```
 
 ```r
-median(stepsPerDay, na.rm=TRUE)
+median(totalStepsPerDay, na.rm=TRUE)
 ```
 
 ```
@@ -134,9 +139,12 @@ median(stepsPerDay, na.rm=TRUE)
 ```
 
 Do these values differ from the estimates from the first part of the assignment?
+
 - Yes, the mean and median are higher than the estimates from the first part.
+
 What is the impact of imputing missing data on the estimates 
 of the total daily number of steps?
+
 - Imputing missing data inflated the total daily number of steps.
 - The number of days with 10000-15000 recorded steps jumped from 25 to 35.
 
@@ -176,4 +184,4 @@ plot(type="l",
      main="Average steps per interval on Weekdays")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-8-1.png)<!-- -->
+![](PA1_template_files/figure-html/aveStepsWeekendvWeekday-1.png)<!-- -->
